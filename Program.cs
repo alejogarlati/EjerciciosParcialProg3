@@ -17,7 +17,7 @@ namespace EjerciciosParcialProg3
                 Console.WriteLine("          MENÚ DE EJERCICIOS");
                 Console.WriteLine("========================================");
                 Console.WriteLine("1. Cajero Automático (Ejercicio 1)");
-                Console.WriteLine("2. [TODO] Ejercicio 2");
+                Console.WriteLine("2. Sistema de Empleados (Ejercicio 2)");
                 Console.WriteLine("3. Salir");
                 Console.WriteLine("========================================");
                 Console.Write(">>> Seleccione una opción: ");
@@ -33,9 +33,7 @@ namespace EjerciciosParcialProg3
                         MenuCajero.MostrarMenu(miCuenta);
                         break;
                     case "2":
-                        Console.WriteLine("\n[TODO] Ejercicio 2 no implementado aún.");
-                        Console.WriteLine("Presione cualquier tecla para volver al menú...");
-                        Console.ReadKey();
+                        MenuEmpleados.MostrarMenu();
                         break;
                     case "3":
                         salir = true;
