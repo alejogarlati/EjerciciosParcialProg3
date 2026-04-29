@@ -18,7 +18,8 @@ namespace EjerciciosParcialProg3
                 Console.WriteLine("========================================");
                 Console.WriteLine("1. Cajero Automático (Ejercicio 1)");
                 Console.WriteLine("2. Sistema de Empleados (Ejercicio 2)");
-                Console.WriteLine("3. Salir");
+                Console.WriteLine("3. Sistema de Notificaciones (Ejercicio 3)");
+                Console.WriteLine("4. Salir");
                 Console.WriteLine("========================================");
                 Console.Write(">>> Seleccione una opción: ");
                 
@@ -36,6 +37,9 @@ namespace EjerciciosParcialProg3
                         MenuEmpleados.MostrarMenu();
                         break;
                     case "3":
+                        MenuNotificaciones.MostrarMenu();
+                        break;
+                    case "4":
                         salir = true;
                         Console.WriteLine("\nSaliendo del programa...");
                         break;
