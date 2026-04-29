@@ -78,8 +78,15 @@ namespace EjerciciosParcial.UI
         {
             Dibujo.EscribirLienzo("Monto a depositar: ", xMenu + 5, yRes);
             string montoStr = Console.ReadLine() ?? "";
-            string mensaje = CuentaBancaria.Depositar(cuenta, montoStr);
-            Dibujo.EscribirLienzo(mensaje, xMenu + 5, yRes + 1, ConsoleColor.Yellow);
+            if (double.TryParse(montoStr, out double monto))
+            {
+                string mensaje = cuenta.Depositar(monto);
+                Dibujo.EscribirLienzo(mensaje, xMenu + 5, yRes + 1, ConsoleColor.Yellow);
+            }
+            else
+            {
+                Dibujo.EscribirLienzo("Debe ingresar un número válido.", xMenu + 5, yRes + 1, ConsoleColor.Red);
+            }
             return yRes + 4;
         }
 
@@ -87,8 +94,15 @@ namespace EjerciciosParcial.UI
         {
             Dibujo.EscribirLienzo("Monto a retirar: ", xMenu + 5, yRes);
             string montoStr = Console.ReadLine() ?? "";
-            string mensaje = CuentaBancaria.Retirar(cuenta, montoStr);
-            Dibujo.EscribirLienzo(mensaje, xMenu + 5, yRes + 1, ConsoleColor.Yellow);
+            if (double.TryParse(montoStr, out double monto))
+            {
+                string mensaje = cuenta.Retirar(monto);
+                Dibujo.EscribirLienzo(mensaje, xMenu + 5, yRes + 1, ConsoleColor.Yellow);
+            }
+            else
+            {
+                Dibujo.EscribirLienzo("Debe ingresar un número válido.", xMenu + 5, yRes + 1, ConsoleColor.Red);
+            }
             return yRes + 4;
         }
 
@@ -98,36 +112,35 @@ namespace EjerciciosParcial.UI
             
             // Calcular el ancho necesario
             int maxLen = " HISTORIAL DE TRANSACCIONES ".Length;
-            if (cuenta.tranPublic.Count == 0)
+            if (cuenta.Historial.Count == 0)
             {
                 maxLen = Math.Max(maxLen, "No hay transacciones registradas.".Length);
             }
             else
             {
-                foreach (var t in cuenta.tranPublic)
+                foreach (var t in cuenta.Historial)
                 {
-                    string linea = $"[{t.FechaHora:dd/MM/yy HH:mm}] {t.TipoTran,-8} | Monto: ${t.Monto,8:F2} | Saldo: ${t.SaldoHistorico,8:F2}";
-                    maxLen = Math.Max(maxLen, linea.Length);
+                    maxLen = Math.Max(maxLen, t.Length);
                 }
             }
             int anchoCuadro = Math.Max(70, maxLen + 8);
 
             // Ajustar alto del cuadro dependiendo de cuántas transacciones hay
-            int altoCuadro = Math.Max(15, cuenta.tranPublic.Count + 6);
+            int altoCuadro = Math.Max(15, cuenta.Historial.Count + 6);
             Dibujo.DibujarCuadroSimple(5, 2, anchoCuadro, altoCuadro);
             Dibujo.EscribirCentradoX(" HISTORIAL DE TRANSACCIONES ", 3, colorFondo: ConsoleColor.DarkGray);
             
             int yOff = 5;
-            if (cuenta.tranPublic.Count == 0)
+            if (cuenta.Historial.Count == 0)
             {
                 Dibujo.EscribirIzquierda("No hay transacciones registradas.", yOff, offsetX: 8);
                 yOff++;
             }
             else
             {
-                foreach (var t in cuenta.tranPublic)
+                foreach (var t in cuenta.Historial)
                 {
-                    Dibujo.EscribirIzquierda($"[{t.FechaHora:dd/MM/yy HH:mm}] {t.TipoTran,-8} | Monto: ${t.Monto,8:F2} | Saldo: ${t.SaldoHistorico,8:F2}", yOff++, offsetX: 8);
+                    Dibujo.EscribirIzquierda(t, yOff++, offsetX: 8);
                 }
             }
             return yOff + 2;
@@ -141,7 +154,7 @@ namespace EjerciciosParcial.UI
                 if (int.TryParse(Console.ReadLine(), out int meses) && meses > 0)
                 {
                     Console.Clear();
-                    double[] evolucion = CuentaBancaria.CalcularEvolucionInteres(cuenta, meses);
+                    double[] evolucion = cuenta.CalcularEvolucionInteres(meses);
 
                     int maxLen = $" EVOLUCIÓN DEL INTERÉS ({meses} MESES) ".Length;
                     for (int i = 0; i < meses; i++)
