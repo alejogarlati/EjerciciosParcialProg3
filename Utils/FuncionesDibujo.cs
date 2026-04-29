@@ -1,7 +1,7 @@
 using System;
-using EjerciciosParcial.Core;
+using EjerciciosParcialProg3.Core;
 
-namespace UI.Utils
+namespace EjerciciosParcialProg3.Utils
 {
     public static class Dibujo
     {

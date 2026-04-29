@@ -6,27 +6,34 @@ namespace EjerciciosParcialProg3.Core
 {
     public class GestorNotificaciones
     {
-        // TODO: Declarar una lista privada de tipo INotificador
+        private List<INotificador> Notificadores;
         
         public GestorNotificaciones()
         {
-            // TODO: Inicializar la lista
+            Notificadores = new List<INotificador>();
         }
 
         public void AgregarNotificador(INotificador notificador)
         {
-            // TODO: Agregar el notificador a la lista
+            Notificadores.Add(notificador);
         }
 
-        public void NotificarATodos(string destinatario, string mensaje)
+        public List<string> NotificarATodos(string destinatario, string mensaje)
         {
-            // TODO: Recorrer todos los notificadores de la lista e invocar su método Enviar()
+            List<string> resultados = new List<string>();
+            foreach (INotificador n in Notificadores) {
+                resultados.Add(n.Enviar(destinatario, mensaje));
+            }
+            return resultados;
         }
 
-        public void MostrarReporte()
+        public List<string> MostrarReporte()
         {
-            // TODO: Recorrer la lista y mostrar por consola cuántos mensajes envió cada notificador.
-            // Pista: Podés usar notificador.GetType().Name para obtener el nombre "NotificadorEmail", etc.
+            List<string> reporte = new List<string>();
+            foreach (INotificador n in Notificadores) {
+                reporte.Add($"Canal {n.PlatNoti}: {n.MensajesEnviados} notificaciones enviadas.");
+            }
+            return reporte;
         }
     }
 }

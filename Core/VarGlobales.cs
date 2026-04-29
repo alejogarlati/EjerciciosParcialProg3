@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EjerciciosParcial.Core
+namespace EjerciciosParcialProg3.Core
 {
     public static class VarGlobales
     {

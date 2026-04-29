@@ -1,6 +1,6 @@
 using System;
 using EjerciciosParcialProg3.Models;
-using EjerciciosParcial.UI;
+using EjerciciosParcialProg3.UI;
 
 namespace EjerciciosParcialProg3
 {

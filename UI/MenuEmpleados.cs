@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using EjerciciosParcialProg3.Models;
-using EjerciciosParcial.Core;
-using UI.Utils;
+using EjerciciosParcialProg3.Core;
+using EjerciciosParcialProg3.Utils;
+using EjerciciosParcialProg3.UI;
 
-namespace EjerciciosParcial.UI
+namespace EjerciciosParcialProg3.UI
 {
     public static class MenuEmpleados
     {
