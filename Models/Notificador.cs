@@ -32,7 +32,7 @@ namespace EjerciciosParcialProg3.Models
         public override string PlatNoti => "EMAIL";
         protected override string EnviarMensajeConcreto(string destinatario, string mensaje)
         {
-            return $"[{PlatNoti}] Enviando correo a {destinatario}: '{mensaje}´";
+            return $"[{PlatNoti}] Enviando correo a {destinatario}: '{mensaje}'";
         }
     }
 

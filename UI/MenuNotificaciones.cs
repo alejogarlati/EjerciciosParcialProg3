@@ -32,21 +32,37 @@ namespace EjerciciosParcialProg3.UI
                 if (destinatario.ToLower() == "salir")
                 {
                     salir = true;
-                    continue; // Vuelve al inicio del bucle y sale
-                } else if (destinatario == "") {
-                    // TODO: Validaciones
-
+                    continue;
+                }
+                else if (string.IsNullOrWhiteSpace(destinatario))
+                {
+                    Dibujo.EscribirLienzo("Error: El destinatario no puede estar vacío.", x + 2, y + 5, ConsoleColor.Red);
+                    Dibujo.EscribirLienzo("[Presione cualquier tecla para reintentar]", x + 2, y + 7, ConsoleColor.DarkGray);
+                    Console.ReadKey();
+                    continue;
                 }
 
                 Dibujo.EscribirIzquierda("Ingrese Mensaje: ", y + 5, offsetX: x + 2);
                 Console.SetCursorPosition(VarGlobales.origX + x + 23, VarGlobales.origY + y + 5);
                 string mensaje = Console.ReadLine() ?? "";
 
+                if (mensaje.ToLower() == "salir")
+                {
+                    salir = true;
+                    continue;
+                }
+                else if (string.IsNullOrWhiteSpace(mensaje))
+                {
+                    Dibujo.EscribirLienzo("Error: El mensaje no puede estar vacío.", x + 2, y + 7, ConsoleColor.Red);
+                    Dibujo.EscribirLienzo("[Presione cualquier tecla para reintentar]", x + 2, y + 9, ConsoleColor.DarkGray);
+                    Console.ReadKey();
+                    continue;
+                }
+
                 // 2. Ejecutar la acción
                 int currentY = y + 7;
                 Dibujo.EscribirLienzo("Enviando notificaciones...", x + 2, currentY++, ConsoleColor.Yellow);
 
-                // El gestor ahora devuelve una lista de strings con los mensajes simulados
                 List<string> resultados = gestor.NotificarATodos(destinatario, mensaje);
                 foreach (string res in resultados)
                 {
@@ -56,7 +72,6 @@ namespace EjerciciosParcialProg3.UI
                 currentY++;
                 Dibujo.EscribirLienzo("Reporte de envíos general:", x + 2, currentY++, ConsoleColor.Cyan);
                 
-                // Pedimos el reporte, que también nos devuelve otra lista de strings
                 List<string> reporte = gestor.MostrarReporte();
                 foreach (string rep in reporte)
                 {
